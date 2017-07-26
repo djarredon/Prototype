@@ -1,3 +1,7 @@
+
+// This file is the New Player Form page. It contains boxes for input and a submit button.
+// The results are sent to the new_player.php page, which adds the user to the database.
+
 <html>
 <body>
 <?php echo file_get_contents("header.html"); ?>

@@ -5,17 +5,25 @@
 <h1>Adding new task</h1>
  
 <?php
+// Username in database
 $username = "w17ddb34";
+// get password for database
 include 'pwddb1.php'; // $password = "your DB password";
+// name of database (same as username, in this case)
 $databasename = "w17ddb34";
+// website hosting the database
 $hostname = "dbclass.cs.pdx.edu";
+// get connection
 $connection = pg_connect("host=$hostname dbname=$databasename user=$username password=$password")
     or die ("Could not connect");
 
 // First, check that the task title isn't already taken
 $query = "select title from worldzer0.task where title = '$_POST[title]'";
+// result of query
 $result = pg_query($connection, $query)
    or die("Query error:" . pg_last_error());
+// if there is a task with the same title, then ask for a new title until a new, unique
+// title is provided
 if (pg_num_rows($result) != 0) {
 	// while invalid task title, ask for title 
 	echo "Task " . $_POST[title] . " already exists.";
@@ -36,8 +44,7 @@ if (pg_num_rows($result) != 0) {
 }
 else {
 	// replace spaces in task title with "_"'s for url
-	$task_url = "/~arredon/worldzer0/t/". str_replace(" ", "_", $_POST[title]) . ".php";
-	// $task_url = "web.cecs.pdx.edu/~arredon/t/".$_POST[title];
+	$task_url = "/~arredon/world0/t/". str_replace(" ", "_", $_POST[title]) . ".php";
 	 
 	$query="INSERT INTO worldzer0.task (title, description, location, points, 
 		level_requirement, task_url)
@@ -48,11 +55,10 @@ else {
 	   or die("Query error:" . pg_last_error());
 	   
 	echo "Insert successful, '$_POST[title]' added\n";
-	// create php page for the task
+	// create url in format "t/title", with '_''s
 	$task_url = "t/".str_replace(" ", "_", $_POST[title]).".php";
-	// echo "<br>Task url: $task_url<br>";
+	// create php page for the task
 	$handle = fopen($task_url, 'w') or die ('Cannot create file: '.$task_url);
-	//chmod($task_url, 0777);
 	//write to file?
 	$contents = "<html>
 <body>

@@ -1,3 +1,7 @@
+<!--
+	This page contains input boxes for creating new tasks, and then sends 
+	the input to the new_task.php page.
+-->
 <html>
 <body>
 <?php echo file_get_contents("header.html"); ?>
