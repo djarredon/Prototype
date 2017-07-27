@@ -24,7 +24,7 @@ $result = pg_query($connection, $query)
 // The table displays the users' usernames (as an html link to their page),
 // their score, and their level
 while($row = pg_fetch_row($result)){
-    echo "<tr><td><a href=\"$row[3]\">$row[0]</td> <td> $row[1]</td> <td> $row[2]</td>\n</tr>";
+    echo "<tr><td><a href=\"/~arredon/world0/user.php/?name=$row[0]\">$row[0]</td> <td> $row[1]</td> <td> $row[2]</td>\n</tr>";
 }
  
  

@@ -27,7 +27,8 @@ $result = pg_query($connection, $query)
 // Display information in table. The task title is a link to the url
 while($row = pg_fetch_row($result)){
     echo '<tr>';
-    echo "<td><a href=\"$row[5]\">$row[0]</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td>
+
+    echo "<td><a href=\"/~arredon/world0/task.php/?title=$row[0]\">$row[0]</td><td>$row[1]</td><td>$row[2]</td><td>$row[3]</td>
 	    <td>$row[4]</td>\n";
 }
  
