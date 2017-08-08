@@ -13,7 +13,6 @@
 </tr>
  
 <?php
-include 'pwddb1.php'; 
 include 'ddb.php';
     
 // Get username, score, level, and url for each player

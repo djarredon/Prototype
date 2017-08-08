@@ -16,7 +16,6 @@
 </tr>
  
 <?php
-include 'pwddb1.php';
 include 'ddb.php';
     
 // Get task title, points, level requirement, description, location, and url.

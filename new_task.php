@@ -5,9 +5,7 @@
 <h1>Adding new task</h1>
  
 <?php
-// get password for database
-include 'pwddb1.php'; 
-// get username, database name, and establish connection
+// get username, database name, password, and establish connection
 include 'ddb.php';
 
 // First, check that the task title isn't already taken

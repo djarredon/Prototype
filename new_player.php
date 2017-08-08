@@ -11,7 +11,6 @@
 <h1>Adding new user</h1>
  
 <?php
-include 'pwddb1.php'; 
 include 'ddb.php';
 
 // First, check that the username isn't already taken
