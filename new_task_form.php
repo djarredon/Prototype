@@ -4,7 +4,7 @@
 -->
 <html>
 <body>
-<?php echo file_get_contents("header.html"); ?>
+<?php include 'ddb.php'; ?>
 
 <h1>Input new task information</h1>
 

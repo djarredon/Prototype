@@ -6,7 +6,7 @@ The results are sent to the new_player.php page, which adds the user to the data
 
 <html>
 <body>
-<?php echo file_get_contents("header.html"); ?>
+<?php include 'ddb.php'; ?>
 
 <h1>Input new user information</h1>
 

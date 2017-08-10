@@ -2,7 +2,6 @@
 <body>
 
 <?php
-echo file_get_contents("header.html");
 include 'ddb.php';
 
 $query = "select username, first_name, last_name, score, level, profile_text, player_id
@@ -36,7 +35,7 @@ if ($s_row[0] != $row[3]) {
 
 echo "<br><br><br>";
 // basic info
-echo "User: $row[0] <br>
+echo "<h2> $row[0] </h2><br>
 	Name: $row[1] $row[2] <br>
 	Level (Score): $row[4] ($row[3]) <br>
 	About me: $row[5]<br>";

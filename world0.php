@@ -1,10 +1,15 @@
-<html>
-<body>
 
-<?php echo file_get_contents("header.html"); ?>
+<?php
+include 'ddb.php';
 
-<h1>World0</h1>
-<p>Description</p>
+echo "  <h1>World0</h1>
+	<p>Description.</p>
+	<p>More stuff.</p>";
 
-</body>
-</html>
+
+/* testing sign-in
+if (isset($_SESSION['username'])) 
+	echo "$_SESSION[username] logged in.<br>";
+*/
+?>
+

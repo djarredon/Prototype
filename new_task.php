@@ -1,24 +1,20 @@
-<html>
-<body>
-<?php echo file_get_contents("header.html"); ?>
+<?php include 'ddb.php'; ?>
 
 <h1>Adding new task</h1>
  
 <?php
-// get username, database name, password, and establish connection
-include 'ddb.php';
+// First, check that the task title isn't already taken.
+// Get username, database name, password, and establish connection.
 
-// First, check that the task title isn't already taken
-$query = "select title from worldzer0.task where title = '$_POST[title]'";
-// result of query
-$result = pg_query($connection, $query)
-   or die("Query error:" . pg_last_error());
+$sth = $connection->prepare("select title from worldzer0.task where title = :title");
+$sth->execute(array(':title' => $_POST['title']));
+$row = $sth->fetch();
+
 // if there is a task with the same title, then ask for a new title until a new, unique
 // title is provided
-if (pg_num_rows($result) != 0) {
+if ($row) {
 	// while invalid task title, ask for title 
 	echo "Task " . $_POST[title] . " already exists.";
-	pg_close($connection);
 	?>
 	<html>
 	<body>
@@ -34,20 +30,18 @@ if (pg_num_rows($result) != 0) {
 	<?php
 }
 else {
-	$task_url = "";
-	 
-	$query="INSERT INTO worldzer0.task (title, description, location, points, 
-		level_requirement, task_url)
-		VALUES ('$_POST[title]', '$_POST[description]', '$_POST[location]', 
-			'$_POST[points]', '$_POST[level_requirement]', '$task_url')";
-	 
-	$result = pg_query($connection, $query)
-	   or die("Query error:" . pg_last_error());
-	   
-	echo "Insert successful, '$_POST[title]' added\n";
-}
+	$sth = $connection->prepare("INSERT INTO worldzer0.task (title, description, location,
+			points, level_requirement)
+			values (:title, :description, :location, :points, :level)");
+
+	if ($sth->execute(array(':title'=>$_POST['title'],
+			':description'=>$_POST['description'], ':location'=>$_POST['location'],
+			':points'=>$_POST['points'], ':level'=>$_POST['level_requirement']))) {
+		echo "Insert successful, '$_POST[title]' added";
+	}
+	else {
+		echo "Insert failed, $_POST[title] not added";
+	}
  
-pg_close($connection);
+}
 ?>
-</body>
-</html>

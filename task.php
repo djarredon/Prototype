@@ -2,9 +2,6 @@
 <body>
 
 <?php 
-echo file_get_contents("header.html");
-
-//echo htmlspecialchars($_GET["title"]);
 include 'ddb.php';
 
 // show task information
@@ -19,7 +16,7 @@ $row = pg_fetch_row($result);
 $task_id = $row[0];
 
 echo "<br><br><br>";
-echo "Title: $row[1]<br>
+echo "<h2>$row[1]</h2><br>
 	Description: $row[2]<br>
 	Location: $row[3]<br>
 	Points: $row[4]<br>
