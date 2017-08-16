@@ -22,10 +22,7 @@ $databasename = "w17ddb34";
 // Website hosting the database
 $hostname = "dbclass.cs.pdx.edu";
 
-/* This part was specifically for postgresql
-$connection = pg_connect("host=$hostname dbname=$databasename user=$username password=$password")
-	or die ("Could not connect");
-*/
+
 
 // This is more generic, and is the only line that needs to be 
 // changed if change databases.

@@ -15,33 +15,27 @@ $row = $sth->fetch();
 if ($row) {
 	// while invalid task title, ask for title 
 	echo "Task " . $_POST[title] . " already exists.";
-	?>
-	<html>
-	<body>
-	<h1>Inputer new task title </h1>
-
-	<form action="new_task.php" method="post">
-	Task Title: <input type="text" name ="title"/><br><br>
-	 
-	<input type="submit" />
-	</form>
-	</body>
-	</html>
-	<?php
+	echo "<h1>Inputer new task title </h1>
+		<form action=\"new_task.php\" method=\"post\">
+		Task Title: <input type=\"text\" name =\"title\"/><br><br>
+		<input type=\"submit\" />
+		</form>";
 }
 else {
 	$sth = $connection->prepare("INSERT INTO worldzer0.task (title, description, location,
-			points, level_requirement)
-			values (:title, :description, :location, :points, :level)");
+			points, level_requirement, created_by)
+			values (:title, :description, :location, :points, :level, :user_id)");
 
 	if ($sth->execute(array(':title'=>$_POST['title'],
 			':description'=>$_POST['description'], ':location'=>$_POST['location'],
-			':points'=>$_POST['points'], ':level'=>$_POST['level_requirement']))) {
-		echo "Insert successful, '$_POST[title]' added";
+			':points'=>$_POST['points'], ':level'=>$_POST['level_requirement'],
+			':user_id'=>$_SESSION['user_id']))) {
+		// echo "Insert successful, '$_POST[title]' added";
+		// redirect to home page
+		header("Location: https://web.cecs.pdx.edu/~arredon/world0/task.php/?title=$_POST[title]");
 	}
 	else {
 		echo "Insert failed, $_POST[title] not added";
 	}
- 
 }
 ?>

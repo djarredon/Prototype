@@ -16,11 +16,6 @@ echo "<h1>Tasks</h1>
  
     
 // Get task title, points, level requirement, description, location, and url.
-/*
-$query = "select title, points, level_requirement, description, location, task_url from worldzer0.task";
-$result = pg_query($connection, $query)
-   or die("Query error:" . pg_last_error());
-*/
 $sth = $connection->prepare("select title, points, level_requirement, description, location, task_url from worldzer0.task");
 $sth->execute();
 
@@ -32,9 +27,6 @@ while($row = $sth->fetch()){
 	    <td>$row[4]</td>\n";
 }
  
- 
-// don't need this anymore
-//pg_close($connection);
 ?>
 
 </table>

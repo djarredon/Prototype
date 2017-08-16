@@ -20,5 +20,4 @@ if (isset($_SESSION['username'])) {
 	header('Location: https://web.cecs.pdx.edu/~arredon/world0/world0.php');
 }
 
-pg_close($connection);
 ?>
