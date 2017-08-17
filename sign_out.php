@@ -1,13 +1,11 @@
-
 <!--
 	This page signs out the current user and redirects to the home page.
 	This page should only be accessable by users already logged in.
 -->
+<?php include 'ddb.php';
 
-<?php include 'ddb.php'; ?>
-<h1>Log Out</h1>
+echo "<h1>Log Out</h1>";
 
-<?php
 // user shouldn't be able to get here unless they're already signed in
 if (isset($_SESSION['username'])) {
 	// remove all session variables
@@ -19,5 +17,3 @@ if (isset($_SESSION['username'])) {
 	// redirect
 	header('Location: https://web.cecs.pdx.edu/~arredon/world0/world0.php');
 }
-
-?>

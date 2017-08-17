@@ -1,4 +1,3 @@
-
 <?php
 /*
 	This file contains common links used on the website.
@@ -23,9 +22,9 @@ if (isset($_SESSION['username'])) {
 // if the user isn't signed in, provide a link to the sign in page, and the sign up page.
 else {
 	echo "<a href=\"/~arredon/world0/sign_in.php\" style=\"float: right;\">Sign In</a>
-		<a href=\"/~arredon/world0/new_player_form.php\" 
+		<a href=\"/~arredon/world0/new_player.php\" 
 		style=\"float: right; padding-right:0.25cm\">Sign Up</a>";
 }
 
-?>
-
+// Title text
+echo "<title>World0: A game of daring and whimsy.</title>";

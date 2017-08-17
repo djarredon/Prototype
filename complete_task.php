@@ -1,8 +1,6 @@
-
 <!-- 
 	This file moves a task from a player's in-progress field to their completed field
 -->
-
 <?php
 include 'ddb.php';
 echo "<h1>Task Completion Page</h1>";
@@ -37,5 +35,3 @@ if ($row != False) {
 	$sth->execute(array(':task_id'=>$_POST['task'], ':group_id'=>$group_id));
 	echo "<br><br><br><h3>Task Completed!</h3><br>";
 }
-
-?>

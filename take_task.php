@@ -44,7 +44,7 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 			break;	
 		}
 		$sth = $connection->prepare("select * from worldzer0.player
-				where player_id= :user_id");
+				where user_id = :user_id");
 		$sth->execute(array(':user_id'=>$user_id));
 		if ($sth->fetch() == false) {
 			$bad_user = true;
@@ -74,9 +74,9 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 		// Friends list
 		echo "<div id=\"friendlist\"><h3>Available Friends: </h3>
 			(These are friends who have not yet completed this task)<br>";
-		$sth = $connection->prepare("select username, level, player_id
+		$sth = $connection->prepare("select username, level, user_id 
 			      from worldzer0.friend F join worldzer0.player P
-			      on P.player_id=F.player_two
+			      on P.user_id=F.player_two
 			      where F.player_one= :user_id");
 		$sth->execute(array(':user_id'=>$user_id));
 
@@ -163,5 +163,3 @@ if ($already_taken)
 	echo "<h4>Task already taken.</h4>";
 if ($already_completed)
 	echo "<h4>Task already completed.</h4>";
-
-	?>

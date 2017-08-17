@@ -1,11 +1,10 @@
-
 <?php
 include 'ddb.php';
 
 // get old profile_text info
 if (isset($_SESSION['user_id'])) {
 	$sth = $connection->prepare("select profile_text from worldzer0.player 
-		where player_id=:user_id");
+		where user_id=:user_id");
 	$sth->execute(array(':user_id'=>$_SESSION['user_id']));
 	$row = $sth->fetch();
 
@@ -19,5 +18,3 @@ if (isset($_SESSION['user_id'])) {
 
 	echo "Current \"About Me\": $row[0]<br>";
 }
-
-?>

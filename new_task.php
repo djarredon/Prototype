@@ -1,8 +1,8 @@
-<?php include 'ddb.php'; ?>
+<?php 
+include 'ddb.php';
 
-<h1>Adding new task</h1>
+echo "<h1>Adding new task</h1>";
  
-<?php
 // First, check that the task title isn't already taken.
 // Get username, database name, password, and establish connection.
 
@@ -38,4 +38,3 @@ else {
 		echo "Insert failed, $_POST[title] not added";
 	}
 }
-?>

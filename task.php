@@ -1,4 +1,3 @@
-
 <?php 
 include 'ddb.php';
 
@@ -12,16 +11,41 @@ $row = $sth->fetch();
 // get creator
 $sth = $connection->prepare("select username
 		from worldzer0.player
-		where player_id=:user_id");
+		where user_id=:user_id");
 $sth->execute(array(':user_id'=>$row[7]));
 $creator = $sth->fetch();
 
 // store task_id
 $task_id = $row[0];
 
-echo "<br><br><br>";
-echo "<h2>$row[1]</h2><br>
-	Created by: <a href=\"/~arredon/world0/user.php/?name=$creator[0]\">$creator[0]</a><br>
+// add "Complete" or "In Progress" tag to header
+$complete = $in_progress = false;
+if (isset($_SESSION['user_id'])) {
+	$sth = $connection->prepare("select * 
+			from worldzer0.task_in_progress P, worldzer0.group_rel G
+			where P.task_id=:task_id and P.group_id=G.group_id 
+			and G.user_id=:user_id");
+	$sth->execute(array(':task_id'=>$task_id, ':user_id'=>$_SESSION['user_id']));
+	if ($sth->fetch())
+		$in_progress = true;
+	else {
+		$sth = $connection->prepare("select * 
+				from worldzer0.task_complete P, worldzer0.group_rel G
+				where P.task_id=:task_id P.group_id=G.group_id
+				and G.user_id=:user_id");
+		$sth->execute(array(':task_id'=>$task_id, ':user_id'=>$_SESSION['user_id']));
+		if ($sth->fetch())
+			$complete = true;
+	}
+}
+if ($complete)
+	echo "<h2>$row[1] (completed)</h2><br>";
+else if ($in_progress)
+	echo "<h2>$row[1] (in progress)</h2><br>";
+else
+	echo "<h2>$row[1]</h2><br>";
+
+echo "Created by: <a href=\"/~arredon/world0/user.php/?name=$creator[0]\">$creator[0]</a><br>
 	Description: $row[2]<br>
 	Location: $row[3]<br>
 	Points: $row[4]<br>
@@ -62,31 +86,28 @@ if (isset($_SESSION['user_id'])) {
 // show users completed
 $sth = $connection->prepare("select username, score, level
 	from worldzer0.player P, worldzer0.group_rel G, worldzer0.task_complete C
-	where C.task_id= :task_id and C.group_id=G.group_id and G.user_id=P.player_id");
+	where C.task_id= :task_id and C.group_id=G.group_id and G.user_id=P.user_id");
 $sth->execute(array(':task_id'=>$task_id));
 
-echo "<div id=\"users_completed_list\" style=\"text-align:right\">Users Completed: <br></div>";
-echo "<table border=\"1\" style=\"float: right;\"> <tr>
+echo "<div id=\"users_completed_list\"><h3>Users Completed: </h3><br></div>";
+echo "<table border=\"1\"> <tr>
 	<td> Username </td> <td> Score </td> <td> Level </td> </tr>";
 while ($row=$sth->fetch()) {
     echo "<tr><td><a href=\"/~arredon/world0/user.php/?name=$row[0]\">$row[0]</td> <td> $row[1]</td> <td> $row[2]</td>\n</tr>";
 }
-echo "</table><br><br><br><br>";
+echo "</table>";
 
 
 // show users in progress
 $sth = $connection->prepare("select username, score, level
 	from worldzer0.player P, worldzer0.group_rel G, worldzer0.task_in_progress I
-	where I.task_id=:task_id and I.group_id=G.group_id and G.user_id=P.player_id");
+	where I.task_id=:task_id and I.group_id=G.group_id and G.user_id=P.user_id");
 $sth->execute(array(':task_id'=>$task_id));
 
-echo "<div id=\"In progress list\" style=\"text-align:right\">Users in Progress: <br></div>";
-echo "<table border=\"1\" style=\"float: right;\"> <tr>
+echo "<div id=\"In progress list\"><h3>Users in Progress: </h3><br></div>";
+echo "<table border=\"1\"> <tr>
 	<td> Username </td> <td> Score </td> <td> Level </td> </tr>";
 while ($row=$sth->fetch()) {
     echo "<tr><td><a href=\"/~arredon/world0/user.php/?name=$row[0]\">$row[0]</td> <td> $row[1]</td> <td> $row[2]</td>\n</tr>";
 }
-echo "</table><br><br><br><br>";
-
-?>
-
+echo "</table>";

@@ -14,4 +14,3 @@ echo "<h1>Input new task information</h1>
 	Minimum Level Requirement: <input type=\"number\" name=\"level_requirement\" /><br><br>
 	<input type=\"submit\" />
 	</form>";
-?>

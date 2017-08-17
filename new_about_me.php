@@ -1,15 +1,12 @@
-
 <?php
 include 'ddb.php';
 
 // get old profile_text info
 $sth = $connection->prepare("update worldzer0.player
 	set profile_text=:new_text
-	where player_id=:user_id");
+	where user_id=:user_id");
 $sth->execute(array(':new_text'=>$_POST['new_about_me'], 
 			':user_id'=>$_SESSION['user_id']));
 
 echo "<br><br><h3>Success!</h3>";
 echo "<a href=\"/~arredon/world0/user.php/?name=$_SESSION[username]\">View Profile";
-
-?>
