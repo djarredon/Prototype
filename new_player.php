@@ -26,9 +26,7 @@ if (!empty($_POST)) {
 	}
 	if (empty($errors)) {
 		// hash password
-		echo "Entering hash0 function<br>";
 		$pwd = hash0($_POST['username'], $_POST['password']);
-		echo "Exited hash0 function<br>";
 
 		$sth = $connection->prepare("INSERT INTO worldzer0.player (score, level, 
 			first_name, last_name, username, pwd, profile_text)

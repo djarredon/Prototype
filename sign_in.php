@@ -25,7 +25,7 @@ if (!(isset($_SESSION['username']))) {
 				from worldzer0.player 
 				where lower(username)=lower(:user)
 				and pwd=:pwd");
-		$sth->execute(array(':user' => $_POST['username'], ':pwd'=>$pwd));
+		$sth->execute(array(':user'=>$_POST['username'], ':pwd'=>$pwd));
 		$row = $sth->fetch();
 				
 		// if username and password are valid, set session.
@@ -45,10 +45,10 @@ if (!(isset($_SESSION['username']))) {
 	// else, provide submission boxes for username (and, eventually, password).
 	else {
 		echo "<form action=\"/~arredon/world0/sign_in.php\" method=\"post\">
-			Username: <input name=\"username\" placeholder=\"username\" type=\"text\"
+			Username (case-sensitive): <input name=\"username\" placeholder=\"username\" type=\"text\"
 			value=\"$_POST[username]\">
 			<br><br>
-			Password: <input type=\"password\" name=\"password\" 
+			Password (case-sensitive): <input type=\"password\" name=\"password\" 
 				placeholder=\"password\">
 			<br><br>
 			<input name=\"submit\" type=\"submit\" value=\"Login\">

@@ -10,11 +10,9 @@ if (isset($_SESSION['user_id'])) {
 
 	echo "<br><br>";
 	echo "<h3>Edit $_SESSION[username]'s Profile Text</h3>";
-	echo "<form action=\"/~arredon/world0/new_about_me.php\" method=\"post\">
-		<fieldset><legend>Edit $_SESSION[username]'s Profile Text</legend>
-		Current: $row[0] <br>
-		New: <input type=\"text\" name=\"new_about_me\"><br>
-		<input type=\"submit\" /><br>";
 
-	echo "Current \"About Me\": $row[0]<br>";
+	echo "<form action=\"/~arredon/world0/new_about_me.php\" method=\"post\" name=\"about_me\">
+		<textarea id=\"textarea\" name=\"new_about_me\" cols=\"50\" rows=\"5\">
+		$row[0]</textarea>
+		<input type=\"Submit\" value=\"Submit\"></form>";
 }
