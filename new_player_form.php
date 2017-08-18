@@ -1,10 +1,13 @@
 <?php 
-include 'ddb.php';
 /*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
 	This file is the New Player Form page. It contains boxes for input and a submit button.
 	The results are sent to the new_player.php page, which adds the user to the database.
 */
 
+include 'ddb.php';
 echo "<h1>Input new user information</h1>
 	<form action=\"new_player.php\" method=\"post\">
 	Username: <input type=\"text\" name =\"username\" required/><br><br>

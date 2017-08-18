@@ -1,7 +1,10 @@
 <?php
 /*
-	This file contains common links used on the website.
-	This file is "included" in ddb.php, and then shared to all other pages
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
+   This file contains common links used on the website.
+   This file is "included" in ddb.php, and then shared to all other pages
 */
 
 // common links (home, player list, task list)

@@ -1,4 +1,8 @@
 <?php 
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+*/
 include 'ddb.php';
 
 // show task information
@@ -39,13 +43,13 @@ if (isset($_SESSION['user_id'])) {
 	}
 }
 if ($complete)
-	echo "<h2>$row[1] (completed)</h2><br>";
+	echo "<h2>$row[1] (completed)</h2>";
 else if ($in_progress)
-	echo "<h2>$row[1] (in progress)</h2><br>";
+	echo "<h2>$row[1] (in progress)</h2>";
 else
-	echo "<h2>$row[1]</h2><br>";
+	echo "<h2>$row[1]</h2>";
 
-echo "Created by: <a href=\"/~arredon/world0/user.php/?name=$creator[0]\">$creator[0]</a><br>
+echo "<h3>Created by: <a href=\"/~arredon/world0/user.php/?name=$creator[0]\">$creator[0]</a></h3>
 	Description: $row[2]<br>
 	Location: $row[3]<br>
 	Points: $row[4]<br>

@@ -1,9 +1,13 @@
-<!--
-	This page signs out the current user and redirects to the home page.
-	This page should only be accessable by users already logged in.
--->
-<?php include 'ddb.php';
+<?php 
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+   
+   This page signs out the current user and redirects to the home page.
+   This page should only be accessable by users already logged in.
+*/
 
+include 'ddb.php';
 echo "<h1>Log Out</h1>";
 
 // user shouldn't be able to get here unless they're already signed in

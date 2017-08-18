@@ -1,4 +1,9 @@
 <?php
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+*/
+
 include 'ddb.php';
 
 // get page owner information

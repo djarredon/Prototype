@@ -1,4 +1,8 @@
 <?php 
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+*/
 include 'ddb.php';
 
 echo "<h1>Adding new task</h1>";

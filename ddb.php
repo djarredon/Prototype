@@ -1,4 +1,8 @@
 <?php
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+*/
 // This file stores the username and database name.
 // Once we've moved to the new database, only this file needs to be updated.
 

@@ -1,4 +1,8 @@
 <?php
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+*/
 include 'ddb.php';
 
 // get old profile_text info

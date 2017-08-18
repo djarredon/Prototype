@@ -1,5 +1,11 @@
 <?php
-	// This page lists all users in the database, their score, and their level.
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
+   This page lists all users in the database, their score, and their level.
+*/
+
 include 'ddb.php';
 
 echo "<h1>Players</h1>

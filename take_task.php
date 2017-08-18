@@ -1,9 +1,14 @@
 <?php
 include 'ddb.php';
-// $_POST['task_id'] is the task ID of the task to be taken,
-// $_SESSION['username']/$_SESSION['user_id'] is the user to take the task.
-// Fields should be provided for up to X friends of the user to work on the task with the 
-// taker. 
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
+   $_POST['task_id'] is the task ID of the task to be taken,
+   $_SESSION['username']/$_SESSION['user_id'] is the user to take the task.
+   Fields should be provided for up to X friends of the user to work on the task with the 
+   taker. 
+*/
 $user_max = 3;	// Picked arbitrarily. Maybe this can be based off of the taker's level, or 
 		// the level of the team that they belong to?
 

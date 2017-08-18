@@ -1,8 +1,12 @@
-<!--
-	This page lists all tasks in the database, their points, their level requirement,
-	their short description, and their location.
--->
 <?php
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
+   This page lists all tasks in the database, their points, their level requirement,
+   their short description, and their location.
+*/
+
 include 'ddb.php';
 echo "<h1>Tasks</h1>
 
@@ -28,7 +32,7 @@ while($row = $sth->fetch()){
     echo "<td><a href=\"/~arredon/world0/task.php/?title=$row[0]\">$row[0]</td>
 	    <td>$row[1]</td><td>$row[2]</td><td>$row[3]</td>
 	    <td>$row[4]</td> 
-	    <td> <a href=\"/~arredon/world0/user.php/?=$row[5]\">$row[5] </td> </tr>";
+	    <td> <a href=\"/~arredon/world0/user.php/?name=$row[5]\">$row[5] </td> </tr>";
 }
  
 ?>

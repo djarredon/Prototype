@@ -1,8 +1,12 @@
-<!--
+<?php 
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
 	This page contains input boxes for creating new tasks, and then sends 
 	the input to the new_task.php page.
--->
-<?php 
+*/
+
 include 'ddb.php';
 
 echo "<h1>Input new task information</h1>

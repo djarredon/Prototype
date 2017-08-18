@@ -1,7 +1,10 @@
-<!-- 
-	This file moves a task from a player's in-progress field to their completed field
--->
 <?php
+/*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+   This file moves a task from a player's in-progress field to their completed field
+*/
+
 include 'ddb.php';
 echo "<h1>Task Completion Page</h1>";
 

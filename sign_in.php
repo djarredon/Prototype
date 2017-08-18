@@ -1,5 +1,8 @@
 <?php 
 /*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
 	This page is for signing in to a user profile.
 	Passwords aren't implemented yet, so this is basically just to test processes
 	like adding/removing friends/enemies, and creating, taking, and completing tasks.
@@ -19,14 +22,21 @@ if (!(isset($_SESSION['username']))) {
 	// if the user has already provided login info, then check against database.
 	if (isset($_POST['username'])) {
 		// hash password
-		$pwd = hash0($_POST['username'], $_POST['password1']);
+		//$hpwd = hash0($_POST['username'], $_POST['password1']);
+		// this line should fix some issues. But also creates some new ones.
+		$hpwd = hash0($_POST['username'], $_POST['password']);
 
-		$sth = $connection->prepare("select username, user_id 
+		$sth = $connection->prepare("select username, user_id, pwd
 				from worldzer0.player 
 				where lower(username)=lower(:user)
-				and pwd=:pwd");
-		$sth->execute(array(':user'=>$_POST['username'], ':pwd'=>$pwd));
+				and pwd=:hpwd");
+		$sth->execute(array(':user'=>$_POST['username'], ':hpwd'=>$hpwd));
 		$row = $sth->fetch();
+
+		/*  Tests query results
+		print_r($row);
+		echo "<br>given password: $hpwd<br>actual password: $row[pwd]<br>";
+		*/
 				
 		// if username and password are valid, set session.
 		if ($row != False) {
@@ -37,6 +47,7 @@ if (!(isset($_SESSION['username']))) {
 			header('Location: https://web.cecs.pdx.edu/~arredon/world0/world0.php');
 		}
 		else {
+			// retry sign in
 			unset($_POST);
 			header('Location: https://web.cecs.pdx.edu/~arredon/world0/sign_in.php');
 		}

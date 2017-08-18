@@ -1,5 +1,8 @@
 <?php
 /*
+   Copyright (c) Daniel J. Arredondo
+   The MIT License (MIT)
+
 	This file checks that given user has a unique username, and then adds them
 	to the database
 */
@@ -26,7 +29,7 @@ if (!empty($_POST)) {
 	}
 	if (empty($errors)) {
 		// hash password
-		$pwd = hash0($_POST['username'], $_POST['password']);
+		$pwd = hash0($_POST['username'], $_POST['password1']);
 
 		$sth = $connection->prepare("INSERT INTO worldzer0.player (score, level, 
 			first_name, last_name, username, pwd, profile_text)
