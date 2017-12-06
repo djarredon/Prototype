@@ -4,13 +4,14 @@
    The MIT License (MIT)
 */
 include 'ddb.php';
+echo "<div class=\"container\">";
 
 echo "<h1>Adding new task</h1>";
  
 // First, check that the task title isn't already taken.
 // Get username, database name, password, and establish connection.
 
-$sth = $connection->prepare("select title from worldzer0.task where title = :title");
+$sth = $connection->prepare("select title from world0.task where title = :title");
 $sth->execute(array(':title' => $_POST['title']));
 $row = $sth->fetch();
 
@@ -26,7 +27,7 @@ if ($row) {
 		</form>";
 }
 else {
-	$sth = $connection->prepare("INSERT INTO worldzer0.task (title, description, location,
+	$sth = $connection->prepare("INSERT INTO world0.task (title, description, location,
 			points, level_requirement, created_by)
 			values (:title, :description, :location, :points, :level, :user_id)");
 

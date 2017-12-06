@@ -30,7 +30,7 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 	// if the button has already been pressed.
 	if (isset($_POST['group_id'])) {
 		// insert into task_in_progress table
-		$sth = $connection->prepare("insert into worldzer0.task_in_progress
+		$sth = $connection->prepare("insert into world0.task_in_progress
 				(group_id, task_id) values (:group_id, :task_id)");
 		$sth->execute(array(':group_id'=>$_POST['group_id'], ':task_id'=>$task_id));
 
@@ -41,14 +41,14 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 	}
 	else {
 		// check that task_id and user_id are valid
-		$sth = $connection->prepare("select * from worldzer0.task
+		$sth = $connection->prepare("select * from world0.task
 				where task_id= :task_id");
 		$sth->execute(array(':task_id'=>$task_id));
 		if ($sth->fetch() == false) {
 			$bad_task = true;
 			break;	
 		}
-		$sth = $connection->prepare("select * from worldzer0.player
+		$sth = $connection->prepare("select * from world0.player
 				where user_id = :user_id");
 		$sth->execute(array(':user_id'=>$user_id));
 		if ($sth->fetch() == false) {
@@ -57,7 +57,7 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 		}
 		// Make sure user hasn't already taken task.
 		$sth = $connection->prepare("select * from 
-				worldzer0.group_rel G, worldzer0.task_in_progress T
+				world0.group_rel G, world0.task_in_progress T
 				where G.user_id=:user_id and G.group_id=T.group_id
 				and T.task_id=:task_id");
 		$sth->execute(array(':user_id'=>$user_id, ':task_id'=>$task_id));
@@ -67,7 +67,7 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 		}
 		// Make sure user hasn't already completed task.
 		$sth = $connection->prepare("select * from 
-				worldzer0.group_rel G, worldzer0.task_completed T
+				world0.group_rel G, world0.task_completed T
 				where G.user_id=:user_id and G.group_id=T.group_id
 				and T.task_id=:task_id");
 		$sth->execute(array(':user_id'=>$user_id, ':task_id'=>$task_id));
@@ -80,7 +80,7 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 		echo "<div id=\"friendlist\"><h3>Available Friends: </h3>
 			(These are friends who have not yet completed this task)<br>";
 		$sth = $connection->prepare("select username, level, user_id 
-			      from worldzer0.friend F join worldzer0.player P
+			      from world0.friend F join world0.player P
 			      on P.user_id=F.player_two
 			      where F.player_one= :user_id");
 		$sth->execute(array(':user_id'=>$user_id));
@@ -90,7 +90,7 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 		while ($row=$sth->fetch()) {
 			$complete = $in_progress = false;
 			$f_sth = $connection->prepare("select *
-					from worldzer0.group_rel G, worldzer0.task_complete C
+					from world0.group_rel G, world0.task_complete C
 					where C.task_id =:task_id and C.group_id=G.group_id
 					and G.user_id=:user_id");
 			$f_sth->execute(array(':task_id'=>$task_id, ':user_id'=>$row[2]));
@@ -100,8 +100,8 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 			}
 			else {
 				$f_sth = $connection->prepare("select *
-						from worldzer0.group_rel G, 
-						worldzer0.task_in_progress C
+						from world0.group_rel G, 
+						world0.task_in_progress C
 						where C.task_id =:task_id 
 						and C.group_id=G.group_id
 						and G.user_id=:user_id");
@@ -126,7 +126,7 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 		// these participants.
 		// RIGHT NOW, just search for group_id of the current user.
 		$sth = $connection->prepare("select group_id
-				from worldzer0.group_rel
+				from world0.group_rel
 				where user_id=:user_id");
 		$sth->execute(array(':user_id'=>$user_id));
 		$g_id = $sth->fetch();
@@ -136,13 +136,13 @@ if (isset($_POST['task_id']) and isset($_SESSION['user_id'])) {
 			// group_id in the database auto selects next available number
 			// when a new value is inserted, so only insert the user_id
 			echo "Making new group";	// test line
-			$sth = $connection->prepare("insert into worldzer0.group_rel
+			$sth = $connection->prepare("insert into world0.group_rel
 					(user_id) values (:user_id)");
 			$sth->execute(array(':user_id'=>$user_id));
 			
 			// now, get the newly made group_id
 			$sth = $connection->prepare("select group_id
-					from worldzer0.group_rel
+					from world0.group_rel
 					where user_id=:user_id");
 			$sth->execute(array(':user_id'=>$user_id));
 			$g_id = $sth->fetch();

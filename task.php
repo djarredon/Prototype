@@ -4,17 +4,18 @@
    The MIT License (MIT)
 */
 include 'ddb.php';
+echo "<div class=\"container\">";
 
 // show task information
 $sth = $connection->prepare("select task_id, title, description, location, 
 		points, level_requirement, rating, created_by
-		from worldzer0.task
+		from world0.task
 		where title= :title");
 $sth->execute(array(':title'=> htmlspecialchars($_GET["title"])));
 $row = $sth->fetch();
 // get creator
 $sth = $connection->prepare("select username
-		from worldzer0.player
+		from world0.player
 		where user_id=:user_id");
 $sth->execute(array(':user_id'=>$row[7]));
 $creator = $sth->fetch();
@@ -26,7 +27,7 @@ $task_id = $row[0];
 $complete = $in_progress = false;
 if (isset($_SESSION['user_id'])) {
 	$sth = $connection->prepare("select * 
-			from worldzer0.task_in_progress P, worldzer0.group_rel G
+			from world0.task_in_progress P, world0.group_rel G
 			where P.task_id=:task_id and P.group_id=G.group_id 
 			and G.user_id=:user_id");
 	$sth->execute(array(':task_id'=>$task_id, ':user_id'=>$_SESSION['user_id']));
@@ -34,7 +35,7 @@ if (isset($_SESSION['user_id'])) {
 		$in_progress = true;
 	else {
 		$sth = $connection->prepare("select * 
-				from worldzer0.task_complete P, worldzer0.group_rel G
+				from world0.task_complete P, world0.group_rel G
 				where P.task_id=:task_id P.group_id=G.group_id
 				and G.user_id=:user_id");
 		$sth->execute(array(':task_id'=>$task_id, ':user_id'=>$_SESSION['user_id']));
@@ -60,7 +61,7 @@ echo "<h3>Created by: <a href=\"/~arredon/world0/user.php/?name=$creator[0]\">$c
 if (isset($_SESSION['user_id'])) {
 	// check if this user is already working on, or completed this task
 	$sth = $connection->prepare("select * 
-			from worldzer0.group_rel G, worldzer0.task_complete C
+			from world0.group_rel G, world0.task_complete C
 			where C.task_id = :task_id and C.group_id=G.group_id
 			and G.user_id= :user_id");
 	$sth->execute(array(':task_id'=>$task_id, ':user_id'=>$_SESSION['user_id']));
@@ -69,7 +70,7 @@ if (isset($_SESSION['user_id'])) {
 	}
 	else {
 		$sth = $connection->prepare("select * 
-				from worldzer0.group_rel G, worldzer0.task_in_progress C
+				from world0.group_rel G, world0.task_in_progress C
 				where C.task_id = :task_id and C.group_id=G.group_id
 				and G.user_id= :user_id");
 		$sth->execute(array(':task_id'=>$task_id, 
@@ -89,7 +90,7 @@ if (isset($_SESSION['user_id'])) {
 
 // show users completed
 $sth = $connection->prepare("select username, score, level
-	from worldzer0.player P, worldzer0.group_rel G, worldzer0.task_complete C
+	from world0.player P, world0.group_rel G, world0.task_complete C
 	where C.task_id= :task_id and C.group_id=G.group_id and G.user_id=P.user_id");
 $sth->execute(array(':task_id'=>$task_id));
 
@@ -104,7 +105,7 @@ echo "</table>";
 
 // show users in progress
 $sth = $connection->prepare("select username, score, level
-	from worldzer0.player P, worldzer0.group_rel G, worldzer0.task_in_progress I
+	from world0.player P, world0.group_rel G, world0.task_in_progress I
 	where I.task_id=:task_id and I.group_id=G.group_id and G.user_id=P.user_id");
 $sth->execute(array(':task_id'=>$task_id));
 

@@ -18,7 +18,7 @@ echo "<h1>Task Completion Page</h1>";
 
 // get group_id of user and task
 $sth = $connection->prepare("select group_id 
-		from worldzer0.group_rel 
+		from world0.group_rel 
 		where user_id=:user_id");
 $sth->execute(array(':user_id'=>$_POST['user']));
 $row = $sth->fetch();
@@ -28,12 +28,12 @@ $group_id = $row[0];
 // else, close connection
 if ($row != False) {
 	// add group_id to task_complete table
-	$sth = $connection->prepare("insert into worldzer0.task_complete (task_id, group_id)
+	$sth = $connection->prepare("insert into world0.task_complete (task_id, group_id)
 		  values (:task_id, :group_id)");
 	$sth->execute(array(':task_id'=>$_POST['task'], ':group_id'=>$group_id));
 
 	// remove group_id from task_in_progress table 
-	$sth = $connection->prepare("delete from worldzer0.task_in_progress 
+	$sth = $connection->prepare("delete from world0.task_in_progress 
 		  where group_id=:group_id and task_id=:task_id;");
 	$sth->execute(array(':task_id'=>$_POST['task'], ':group_id'=>$group_id));
 	echo "<br><br><br><h3>Task Completed!</h3><br>";

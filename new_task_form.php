@@ -8,6 +8,7 @@
 */
 
 include 'ddb.php';
+echo "<div class=\"container\">";
 
 echo "<h1>Input new task information</h1>
 	<form action=\"new_task.php\" method=\"post\">

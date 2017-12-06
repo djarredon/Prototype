@@ -8,13 +8,14 @@
 */
 include 'ddb.php';
 include 'functions.php';
+echo "<div class=\"container\">";
 
 echo "<h1>Adding new user</h1>";
 $errors = array();
 
 if (!empty($_POST)) {
 	// First, check that the username isn't already taken
-	$sth = $connection->prepare("select username from worldzer0.player 
+	$sth = $connection->prepare("select username from world0.player 
 			where lower(username) = lower(:user) ");
 	$sth->execute(array(':user' => $_POST['username']));
 	$row = $sth->fetch();
@@ -31,7 +32,7 @@ if (!empty($_POST)) {
 		// hash password
 		$pwd = hash0($_POST['username'], $_POST['password1']);
 
-		$sth = $connection->prepare("INSERT INTO worldzer0.player (score, level, 
+		$sth = $connection->prepare("INSERT INTO world0.player (score, level, 
 			first_name, last_name, username, pwd, profile_text)
 			VALUES (0, 1, :first_name, :last_name, :username, :pwd, :profile_text)");
 

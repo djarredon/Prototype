@@ -1,6 +1,8 @@
 <?php
 include 'ddb.php';
 
+// wrap page in bootstrap container
+echo "<div class=\"container\">";
 echo "  <h1>World0</h1>";
 
 if (isset($_SESSION['username']))

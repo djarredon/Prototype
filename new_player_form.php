@@ -8,6 +8,7 @@
 */
 
 include 'ddb.php';
+echo "<div class=\"container\">";
 echo "<h1>Input new user information</h1>
 	<form action=\"new_player.php\" method=\"post\">
 	Username: <input type=\"text\" name =\"username\" required/><br><br>

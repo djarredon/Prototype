@@ -4,9 +4,10 @@
    The MIT License (MIT)
 */
 include 'ddb.php';
+echo "<div class=\"container\">";
 
 // get old profile_text info
-$sth = $connection->prepare("update worldzer0.player
+$sth = $connection->prepare("update world0.player
 	set profile_text=:new_text
 	where user_id=:user_id");
 $sth->execute(array(':new_text'=>$_POST['new_about_me'], 

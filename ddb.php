@@ -17,6 +17,12 @@ session_start();
 
 // get header
 include 'header.php';
+// chat app
+/*
+if (isset($_SESSION['username'])) {
+	include 'chatapp.php';
+}
+*/
 // get database password
 include 'pwddb1.php'; 
 
